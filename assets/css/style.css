@@ -1,0 +1,8 @@
+
+	.nav-top {
+		font-style: italic;
+	}
+	.nav-top .nav-top__link {
+		color: #ffbb00;
+		text-decoration: none;
+	}
