@@ -22,27 +22,39 @@
 
 	<div w3-include-html="content.html"></div>
 
-	<div class="container pt-5">
+	<div class="container">
 		<h1>Curso de Vue v3</h1>
 		<br>
 		<div id="main">
 			<h2>{{ title }}</h2>
 			<p>{{ amount > 10 ? 'Es mayor a 10' : 'Es igual o menor a 10' }}</p>
 		</div>
-		<hr class="my-5">
+		<hr>
 		<div id="bank">
 			<h2>{{ title }}</h2>
-			<p>Este es mi saldo: {{ amount }} - <a :target="target" :href="link">{{ link }}</a></p>
-			<p>El estado de la cuenta es: <span v-if="status">Activada</span><span v-else>Desactivada</span></p>
+			<p>
+				<small class="text-success">El <b>v-bind:</b> y <b>:</b> es lo mismo y se utilizan para enllazar contenido.</small> <br>
+				Este es mi saldo: <span :class="[amount > 5 ? 'text-success' : 'text-danger']"><b>{{ amount }}</b></span> - <a v-bind:target="target" :href="link">{{ link }}</a>
+			</p>
+			<p>
+				La cuenta está <b><span :class="amountColor">{{ status ? 'activada' : 'desactivada' }}</span></b> <br>
+				<button v-if="status" @click="desAcount" class="btn btn-danger">Desactivar cuenta</button>
+				<button v-else @click="actAcount" class="btn btn-success">Activar cuenta</button>
+			</p>
+			<p>
+				<small class="text-success">El <b>v-on:</b> y <b>@</b> es lo mismo y se utiliza para llamar a metodos.</small> <br>
+				<button v-on:click="addAmount(1)" class="btn btn-success">Agregar saldo</button>
+				<button @click="subAmount(1)" class="btn btn-danger" :disabled="amount === 0">Restar saldo</button>
+			</p>
 			<p>
 				<span v-if="amount > 10" class="text-success">Eres rico del cagarse</span>
-				<span v-else-if="amount <= 10 && amount > 0" class="text-primary">No tienes la riqueza que quieres pero si la que necesitas</span>
+				<span v-else-if="amount <= 10 && amount > 3" class="text-primary">No tienes la riqueza que quieres pero si la que necesitas</span>
 				<span v-else class="text-danger">Eres más pobre que las ratas</span>
 			</p>
 
 			<ul v-if="fruits.length" class="list-unstyled">
-				<li><b>Listado de frutas</b></li>
-				<li v-for="(fruit,i) in fruits" :key="i">{{i}} - {{ fruit }}</li>
+				<li><h3>Listado de frutas</h3></li>
+				<li v-for="(fruit,i) in fruits" :key="i">El índice de <b>{{ fruit }}</b> es <em>{{i+1}}</em></li>
 			</ul>
 			<p v-else>Sin frutas</p>
 		</div>

@@ -17,5 +17,24 @@ const bank = Vue.createApp({
 			status: true,
 			fruits: ['Pera','Manzana','Platano','Naranja','Ciruela']
 		}
+	},
+	methods: {
+		actAcount() {
+			this.status = true;
+		},
+		desAcount() {
+			this.status = false;
+		},
+		addAmount(val) {
+			this.amount = this.amount + val;
+		},
+		subAmount(val) {
+			this.amount = this.amount - val;
+		}
+	},
+	computed: {
+		amountColor() {
+			return this.status ? 'text-success' : 'text-danger';
+		}
 	}
 });
